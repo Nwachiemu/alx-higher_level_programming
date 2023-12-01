@@ -1,37 +1,37 @@
 #!/usr/bin/python3
-"""program fixes the N queens problem"""
+"""Solves the N-queens puzzle"""
 
 import sys
 
 
 def init_board(n):
-    """Initialize n"""
+    """Initialize n chessboard"""
     board = []
     [board.append([]) for i in range(n)]
     [row.append(' ') for i in range(n) for row in board]
-    return board
+    return (board)
 
 
 def board_deepcopy(board):
-    """deepcopy return"""
+    """return deepcopy chessboard"""
     if isinstance(board, list):
         return list(map(board_deepcopy, board))
-    return board
+    return (board)
 
 
 def get_solution(board):
-    """solution list returned"""
+    """return list of solved chessboard"""
     solution = []
     for r in range(len(board)):
         for c in range(len(board)):
             if board[r][c] == "Q":
                 solution.append([r, c])
                 break
-    return solution
+    return (solution)
 
 
 def xout(board, row, col):
-    """xout positions on the board"""
+    """X out spots on a chessboard"""
     for c in range(col + 1, len(board)):
         board[row][c] = "x"
     for c in range(col - 1, -1, -1):
@@ -67,10 +67,10 @@ def xout(board, row, col):
 
 
 def recursive_solve(board, row, queens, solutions):
-    """recursively solves an N-queens"""
+    """recursive fixes the N-queens puzzle"""
     if queens == len(board):
         solutions.append(get_solution(board))
-        return solutions
+        return (solutions)
 
     for c in range(len(board)):
         if board[row][c] == " ":
@@ -80,10 +80,10 @@ def recursive_solve(board, row, queens, solutions):
             solutions = recursive_solve(tmp_board, row + 1,
                                         queens + 1, solutions)
 
-    return solutions
+    return (solutions)
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
